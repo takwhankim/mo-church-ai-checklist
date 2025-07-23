@@ -10,38 +10,213 @@
 </head>
 <body>
     <div class="container">
-        <div class="progress-bar">
-            <div class="progress" id="progressBar"></div>
-        </div>
-        <div id="progressText" style="text-align:center; margin-bottom:20px; color:#4158d0; font-weight:bold;"></div>
-        <div id="areaScores" style="text-align:center; margin-bottom:20px;"></div>
-        <div style="text-align:center; margin-bottom:30px;">
-            <button type="button" id="printBtn" style="margin:0 10px;" onclick="window.print()">프린트</button>
-            <button type="button" id="pdfBtn" style="margin:0 10px;">PDF 저장</button>
-            <button type="button" id="imgBtn" style="margin:0 10px;">이미지 저장</button>
-            <button type="button" id="langBtn" style="margin:0 10px;">English</button>
-        </div>
-        <div class="header">
-            <h1>성도 및 사역자용 AI 도입 체크리스트</h1>
-        </div>
-        <div class="questions">
-            <!-- 각 질문에 fieldset/legend로 접근성 개선 -->
-            <fieldset>
-                <legend>1. 성도 관리 및 커뮤니케이션</legend>
-                <!-- 라디오 label 연결 확인 및 보완 -->
-                <label><input type="radio" name="q1_1" value="5">성도 관리 및 커뮤니케이션 시스템이 있습니다.</label>
-                <label><input type="radio" name="q1_1" value="0">성도 관리 및 커뮤니케이션 시스템이 없습니다.</label>
-                <label><input type="radio" name="q1_2" value="5">성도들 간의 소통 및 커뮤니티 활성화를 위한 플랫폼이 있습니다.</label>
-                <label><input type="radio" name="q1_2" value="0">성도들 간의 소통 및 커뮤니티 활성화를 위한 플랫폼이 없습니다.</label>
-            </fieldset>
-            <!-- ... 나머지 질문들 ... -->
-        </div>
+        <form id="checklistForm">
+            <div class="section">
+                <h2><span class="section-number">1</span>AI 도입의 목적과 필요성</h2>
+                <div class="question">
+                    <h3>AI 도입의 구체적인 목적이 무엇인가요?</h3>
+                    <div class="description">
+                        예배의 효율성을 높이기 위함인가요? (예: 예배 준비, 설교 자동화)<br>
+                        성도 관리 및 소통 강화 목적인가요? (예: 출석 관리, 개인 맞춤형 피드백)<br>
+                        선교 및 지역 사회와의 관계를 증진시키기 위한 목적인가요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q1_1" value="1" id="q1_1_1"><label for="q1_1_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q1_1" value="2" id="q1_1_2"><label for="q1_1_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q1_1" value="3" id="q1_1_3"><label for="q1_1_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q1_1" value="4" id="q1_1_4"><label for="q1_1_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q1_1" value="5" id="q1_1_5"><label for="q1_1_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+                </div>
+                <div class="question">
+                    <h3>AI 도입을 통해 해결하고자 하는 핵심 문제는 무엇인가요?</h3>
+                    <div class="description">
+                        예배 진행의 효율성, 성도들의 참여도 향상, 봉사자 관리의 효율화, 선교 활동의 디지털화 등
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q1_2" value="1" id="q1_2_1"><label for="q1_2_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q1_2" value="2" id="q1_2_2"><label for="q1_2_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q1_2" value="3" id="q1_2_3"><label for="q1_2_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q1_2" value="4" id="q1_2_4"><label for="q1_2_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q1_2" value="5" id="q1_2_5"><label for="q1_2_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 그렇지 않다</span><span>매우 구체적이다</span></div>
+                </div>
+            </div>
+            <div class="section">
+                <h2><span class="section-number">2</span>AI 도입 목표의 일관성 및 전략</h2>
+                <div class="question">
+                    <h3>AI 도입 목표가 교회의 비전과 사역 목표에 일관되게 부합한다고 생각하나요?</h3>
+                    <div class="description">
+                        AI가 교회의 신앙적 목표(예배, 교육, 선교 등)를 지원하는 데 어떻게 기여할 수 있을지 구체적으로 정의되어 있나요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q2_1" value="1" id="q2_1_1"><label for="q2_1_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q2_1" value="2" id="q2_1_2"><label for="q2_1_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q2_1" value="3" id="q2_1_3"><label for="q2_1_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q2_1" value="4" id="q2_1_4"><label for="q2_1_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q2_1" value="5" id="q2_1_5"><label for="q2_1_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 그렇지 않다</span><span>매우 그렇다</span></div>
+                </div>
+                <div class="question">
+                    <h3>AI 도입이 교회의 사역 전략과 어떻게 맞물릴까요?</h3>
+                    <div class="description">
+                        예배의 질을 향상시키기 위한 전략으로 AI가 어떻게 도입될 수 있을까요?<br>
+                        성도들의 신앙 성장 및 참여를 촉진하기 위한 방안으로 AI가 어떻게 기여할 수 있을까요?<br>
+                        선교 활동의 전략적 확장을 위해 AI는 어떤 역할을 할 수 있을까요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q2_2" value="1" id="q2_2_1"><label for="q2_2_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q2_2" value="2" id="q2_2_2"><label for="q2_2_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q2_2" value="3" id="q2_2_3"><label for="q2_2_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q2_2" value="4" id="q2_2_4"><label for="q2_2_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q2_2" value="5" id="q2_2_5"><label for="q2_2_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 부합하지 않는다</span><span>매우 부합한다</span></div>
+                </div>
+            </div>
+            <div class="section">
+                <h2><span class="section-number">3</span>AI 기술 및 인프라 준비 상태</h2>
+                <div class="question">
+                    <h3>교회의 IT 인프라는 AI 도입을 충분히 지원할 수 있나요?</h3>
+                    <div class="description">
+                        서버, 네트워크, 클라우드 저장소 등 기술적 인프라가 AI 시스템을 원활하게 지원할 수 있는지 점검했나요?<br>
+                        AI 도입에 필요한 소프트웨어와 하드웨어 요구 사항을 충족할 수 있나요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q3_1" value="1" id="q3_1_1"><label for="q3_1_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q3_1" value="2" id="q3_1_2"><label for="q3_1_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q3_1" value="3" id="q3_1_3"><label for="q3_1_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q3_1" value="4" id="q3_1_4"><label for="q3_1_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q3_1" value="5" id="q3_1_5"><label for="q3_1_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 준비되지 않았다</span><span>완벽하게 준비되었다</span></div>
+                </div>
+                <div class="question">
+                    <h3>교회 내 IT 지원팀 또는 외부 협력 업체가 충분히 준비되어 있나요?</h3>
+                    <div class="description">
+                        AI 시스템을 구축하고 관리할 수 있는 기술적 지원팀(내부 직원/외부 파트너)이 준비되어 있나요?<br>
+                        유지보수 및 기술적 문제 해결을 위한 대응 계획이 마련되어 있나요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q3_2" value="1" id="q3_2_1"><label for="q3_2_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q3_2" value="2" id="q3_2_2"><label for="q3_2_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q3_2" value="3" id="q3_2_3"><label for="q3_2_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q3_2" value="4" id="q3_2_4"><label for="q3_2_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q3_2" value="5" id="q3_2_5"><label for="q3_2_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 준비되지 않았다</span><span>완벽하게 준비되었다</span></div>
+                </div>
+            </div>
+            <div class="section">
+                <h2><span class="section-number">4</span>AI의 신앙적 가치와 윤리적 측면</h2>
+                <div class="question">
+                    <h3>AI 도입이 교회의 신앙적 가치에 부합한다고 생각하나요?</h3>
+                    <div class="description">
+                        AI 기술이 예배, 기도, 성경 교육, 성도 관리 등 신앙적 활동을 어떻게 보완할 수 있을까요?<br>
+                        AI가 신앙적 의도를 왜곡하거나 성도들과의 관계에서 불편함을 초래할 위험은 없을까요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q4_1" value="1" id="q4_1_1"><label for="q4_1_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q4_1" value="2" id="q4_1_2"><label for="q4_1_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q4_1" value="3" id="q4_1_3"><label for="q4_1_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q4_1" value="4" id="q4_1_4"><label for="q4_1_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q4_1" value="5" id="q4_1_5"><label for="q4_1_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 부합하지 않는다</span><span>매우 부합한다</span></div>
+                </div>
+                <div class="question">
+                    <h3>AI 도입 시 윤리적 고려 사항이 충분히 반영되었나요?</h3>
+                    <div class="description">
+                        AI 시스템의 사용에 있어 교회 내 윤리적 기준과 정책이 명확히 정립되어 있나요?<br>
+                        AI의 사용이 성도들의 신앙 생활에 미칠 영향(긍정적/부정적)을 충분히 고려하고 있나요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q4_2" value="1" id="q4_2_1"><label for="q4_2_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q4_2" value="2" id="q4_2_2"><label for="q4_2_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q4_2" value="3" id="q4_2_3"><label for="q4_2_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q4_2" value="4" id="q4_2_4"><label for="q4_2_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q4_2" value="5" id="q4_2_5"><label for="q4_2_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 고려되지 않았다</span><span>완벽하게 고려되었다</span></div>
+                </div>
+            </div>
+            <div class="section">
+                <h2><span class="section-number">5</span>AI 도입 후 운영 및 유지 관리</h2>
+                <div class="question">
+                    <h3>AI 시스템이 교회 내에서 지속적으로 운영될 수 있을까요?</h3>
+                    <div class="description">
+                        도입 후 유지보수와 시스템 관리가 잘 이루어질 수 있는 계획이 마련되어 있나요?<br>
+                        AI 시스템의 성능을 주기적으로 점검하고, 필요에 따라 업데이트 및 개선할 계획이 있나요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q5_1" value="1" id="q5_1_1"><label for="q5_1_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q5_1" value="2" id="q5_1_2"><label for="q5_1_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q5_1" value="3" id="q5_1_3"><label for="q5_1_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q5_1" value="4" id="q5_1_4"><label for="q5_1_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q5_1" value="5" id="q5_1_5"><label for="q5_1_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 이루어질 수 없다</span><span>완벽히 관리 가능하다</span></div>
+                </div>
+            </div>
+            <div class="section">
+                <h2><span class="section-number">6</span>성도들의 반응 및 수용 준비</h2>
+                <div class="question">
+                    <h3>성도들이 AI 시스템을 신뢰하고 수용할 준비가 되어 있다고 생각하나요?</h3>
+                    <div class="description">
+                        AI의 도입에 대한 성도들의 우려를 어떻게 해소할 수 있을까요?<br>
+                        AI 시스템의 기능과 목적에 대해 성도들에게 충분한 교육과 정보를 제공할 계획이 있나요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q6_1" value="1" id="q6_1_1"><label for="q6_1_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q6_1" value="2" id="q6_1_2"><label for="q6_1_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q6_1" value="3" id="q6_1_3"><label for="q6_1_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q6_1" value="4" id="q6_1_4"><label for="q6_1_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q6_1" value="5" id="q6_1_5"><label for="q6_1_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 준비되지 않았다</span><span>완벽하게 준비되었다</span></div>
+                </div>
+            </div>
+            <div class="section">
+                <h2><span class="section-number">7</span>데이터 보안 및 개인정보 보호</h2>
+                <div class="question">
+                    <h3>AI 시스템이 교회 데이터와 성도들의 개인정보를 안전하게 보호할 수 있도록 설계되었나요?</h3>
+                    <div class="description">
+                        교회 내 개인정보 보호 정책 및 보안 절차가 AI 시스템과 어떻게 결합되어 있는지 확인했나요?
+                    </div>
+                    <div class="likert-scale">
+                        <div class="scale-option"><input type="radio" name="q7_1" value="1" id="q7_1_1"><label for="q7_1_1">1</label></div>
+                        <div class="scale-option"><input type="radio" name="q7_1" value="2" id="q7_1_2"><label for="q7_1_2">2</label></div>
+                        <div class="scale-option"><input type="radio" name="q7_1" value="3" id="q7_1_3"><label for="q7_1_3">3</label></div>
+                        <div class="scale-option"><input type="radio" name="q7_1" value="4" id="q7_1_4"><label for="q7_1_4">4</label></div>
+                        <div class="scale-option"><input type="radio" name="q7_1" value="5" id="q7_1_5"><label for="q7_1_5">5</label></div>
+                    </div>
+                    <div class="scale-labels"><span>전혀 안전하지 않다</span><span>완벽하게 안전하다</span></div>
+                </div>
+            </div>
+            <!-- 진행률 바, n/11 표시, 영역별 점수 표시 -->
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <div id="progressText" style="text-align:center; margin-bottom:20px; color:#4158d0; font-weight:bold;"></div>
+            <div id="areaScores" style="text-align:center; margin-bottom:20px;"></div>
+            <button type="button" class="calculate-btn" onclick="calculateScore()">결과 확인하기</button>
+        </form>
+        <!-- 결과 표시 -->
         <div id="result" style="display:none;">
             <h2 id="resultTitle"></h2>
             <p>총점: <span id="totalScore"></span></p>
             <p id="recommendation"></p>
         </div>
-        <button type="button" onclick="calculateScore()">결과 확인</button>
+    </div>
+    <!-- PDF/이미지 저장, 프린트, 다국어 토글 버튼 추가 -->
+    <div style="text-align:center; margin-bottom:30px;">
+        <button type="button" id="printBtn" style="margin:0 10px;" onclick="window.print()">프린트</button>
+        <button type="button" id="pdfBtn" style="margin:0 10px;">PDF 저장</button>
+        <button type="button" id="imgBtn" style="margin:0 10px;">이미지 저장</button>
+        <button type="button" id="langBtn" style="margin:0 10px;">English</button>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -119,12 +294,15 @@
                 alert('모든 질문에 답해주세요. 답하지 않은 질문이 있습니다.');
                 return;
             }
+            // 100점 만점 환산
             const percentScore = Math.round((totalScore / 55) * 100);
+            // 영역별 점수 표시
             let areaScoreText = '';
             for (let area=1; area<=7; area++) {
                 areaScoreText += `영역${area}: ${areaScores[area]} / ${areaMax[area]}점  `;
             }
             document.getElementById('areaScores').textContent = areaScoreText;
+            // 결과 표시
             const resultDiv = document.getElementById('result');
             const resultTitle = document.getElementById('resultTitle');
             const totalScoreDiv = document.getElementById('totalScore');
