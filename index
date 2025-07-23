@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>성도 및 사역자용 AI 도입 체크리스트</title>
+    <meta property="twitter:image" content="https://takwhankim.github.io/church-ai-readiness-checklist/pastor.png">
+    <style>
+        /* ... existing styles ... */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+        </div>
+        <div id="progressText" style="text-align:center; margin-bottom:20px; color:#4158d0; font-weight:bold;"></div>
+        <div id="areaScores" style="text-align:center; margin-bottom:20px;"></div>
+        <div style="text-align:center; margin-bottom:30px;">
+            <button type="button" id="printBtn" style="margin:0 10px;" onclick="window.print()">프린트</button>
+            <button type="button" id="pdfBtn" style="margin:0 10px;">PDF 저장</button>
+            <button type="button" id="imgBtn" style="margin:0 10px;">이미지 저장</button>
+            <button type="button" id="langBtn" style="margin:0 10px;">English</button>
+        </div>
+        <div class="header">
+            <h1>성도 및 사역자용 AI 도입 체크리스트</h1>
+        </div>
+        <div class="questions">
+            <!-- 각 질문에 fieldset/legend로 접근성 개선 -->
+            <fieldset>
+                <legend>1. 성도 관리 및 커뮤니케이션</legend>
+                <!-- 라디오 label 연결 확인 및 보완 -->
+                <label><input type="radio" name="q1_1" value="5">성도 관리 및 커뮤니케이션 시스템이 있습니다.</label>
+                <label><input type="radio" name="q1_1" value="0">성도 관리 및 커뮤니케이션 시스템이 없습니다.</label>
+                <label><input type="radio" name="q1_2" value="5">성도들 간의 소통 및 커뮤니티 활성화를 위한 플랫폼이 있습니다.</label>
+                <label><input type="radio" name="q1_2" value="0">성도들 간의 소통 및 커뮤니티 활성화를 위한 플랫폼이 없습니다.</label>
+            </fieldset>
+            <!-- ... 나머지 질문들 ... -->
+        </div>
+        <div id="result" style="display:none;">
+            <h2 id="resultTitle"></h2>
+            <p>총점: <span id="totalScore"></span></p>
+            <p id="recommendation"></p>
+        </div>
+        <button type="button" onclick="calculateScore()">결과 확인</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        function updateProgress() {
+            const totalQuestions = 11;
+            let answeredQuestions = 0;
+            for (let i = 1; i <= 7; i++) {
+                if (i === 1 || i === 2 || i === 3 || i === 4) {
+                    for (let j = 1; j <= 2; j++) {
+                        if (document.querySelector(`input[name="q${i}_${j}"]:checked`)) {
+                            answeredQuestions++;
+                        }
+                    }
+                } else {
+                    if (document.querySelector(`input[name="q${i}_1"]:checked`)) {
+                        answeredQuestions++;
+                    }
+                }
+            }
+            const progressPercentage = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progressPercentage + '%';
+            document.getElementById('progressText').textContent = `${answeredQuestions} / ${totalQuestions} 문항 완료`;
+        }
+        function hideResult() {
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('areaScores').textContent = '';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(button => {
+                button.addEventListener('change', function() {
+                    updateProgress();
+                    hideResult();
+                });
+            });
+            updateProgress();
+        });
+        function calculateScore() {
+            const questions = [
+                'q1_1', 'q1_2', 'q2_1', 'q2_2', 'q3_1', 'q3_2', 
+                'q4_1', 'q4_2', 'q5_1', 'q6_1', 'q7_1'
+            ];
+            const areaMap = {
+                1: ['q1_1', 'q1_2'],
+                2: ['q2_1', 'q2_2'],
+                3: ['q3_1', 'q3_2'],
+                4: ['q4_1', 'q4_2'],
+                5: ['q5_1'],
+                6: ['q6_1'],
+                7: ['q7_1']
+            };
+            let totalScore = 0;
+            let unansweredQuestions = [];
+            let areaScores = {};
+            let areaMax = {1:10,2:10,3:10,4:10,5:5,6:5,7:5};
+            for (let area=1; area<=7; area++) {
+                areaScores[area] = 0;
+                areaMap[area].forEach(q => {
+                    const selectedOption = document.querySelector(`input[name="${q}"]:checked`);
+                    if (selectedOption) {
+                        areaScores[area] += parseInt(selectedOption.value);
+                    }
+                });
+            }
+            questions.forEach((question, index) => {
+                const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+                if (selectedOption) {
+                    totalScore += parseInt(selectedOption.value);
+                } else {
+                    unansweredQuestions.push(index + 1);
+                }
+            });
+            if (unansweredQuestions.length > 0) {
+                alert('모든 질문에 답해주세요. 답하지 않은 질문이 있습니다.');
+                return;
+            }
+            const percentScore = Math.round((totalScore / 55) * 100);
+            let areaScoreText = '';
+            for (let area=1; area<=7; area++) {
+                areaScoreText += `영역${area}: ${areaScores[area]} / ${areaMax[area]}점  `;
+            }
+            document.getElementById('areaScores').textContent = areaScoreText;
+            const resultDiv = document.getElementById('result');
+            const resultTitle = document.getElementById('resultTitle');
+            const totalScoreDiv = document.getElementById('totalScore');
+            const recommendation = document.getElementById('recommendation');
+            totalScoreDiv.textContent = percentScore + '점';
+            if (percentScore >= 80) {
+                resultDiv.className = 'result excellent';
+                resultTitle.textContent = '적극 추천';
+                recommendation.innerHTML = `<strong>축하합니다!</strong><br>AI 도입을 위한 충분한 준비가 되어 있습니다. 바로 도입을 추진할 수 있습니다.`;
+            } else if (percentScore >= 60) {
+                resultDiv.className = 'result good';
+                resultTitle.textContent = '보통 (준비 필요)';
+                recommendation.innerHTML = `준비가 어느 정도 되어 있으나, 추가적인 개선과 검토가 필요합니다.`;
+            } else if (percentScore >= 44) {
+                resultDiv.className = 'result caution';
+                resultTitle.textContent = '주의 필요';
+                recommendation.innerHTML = `AI 도입에 있어 여러 준비가 부족할 수 있습니다. 신중한 검토가 필요합니다.`;
+            } else {
+                resultDiv.className = 'result poor';
+                resultTitle.textContent = '도입 재검토';
+                recommendation.innerHTML = `교회가 AI 도입을 위한 준비가 부족합니다. 도입을 재검토해야 할 단계입니다.`;
+            }
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        window.onload = function() {
+            document.getElementById('pdfBtn').onclick = function() {
+                html2canvas(document.querySelector('.container')).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new window.jspdf.jsPDF('p', 'mm', 'a4');
+                    const pageWidth = pdf.internal.pageSize.getWidth();
+                    const pageHeight = pdf.internal.pageSize.getHeight();
+                    const imgProps = pdf.getImageProperties(imgData);
+                    const pdfWidth = pageWidth;
+                    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                    pdf.save('checklist_result.pdf');
+                });
+            };
+            document.getElementById('imgBtn').onclick = function() {
+                html2canvas(document.querySelector('.container')).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = 'checklist_result.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                });
+            };
+            let lang = 'ko';
+            document.getElementById('langBtn').onclick = function() {
+                lang = lang === 'ko' ? 'en' : 'ko';
+                setLanguage(lang);
+            };
+        };
+        function setLanguage(lang) {
+            alert('다국어 지원은 현재 데모입니다. 실제 적용 시 각 텍스트를 번역해 주세요.');
+        }
+    </script>
+</body>
+</html>
